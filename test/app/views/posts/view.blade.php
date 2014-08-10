@@ -1,4 +1,4 @@
-<p><a href="{{ URL::route("posts.index") }}">Back</a></p>
+<p><a href="{{URL::to('/posts')}}">Back</a></p>
 	<h1>{{"VDM : $posts->id"}}</h1>
 
 	<p>{{$posts->content}}</p>
