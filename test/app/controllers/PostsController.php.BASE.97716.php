@@ -47,21 +47,7 @@ class PostsController extends BaseController {
 	}
 
 	public function updateVdms(){
-		//on vide la table Posts
--		DB::table('posts')->delete();
-
-		// on recupere les Vdms
-		$url="http://apps.fmylife.com/v8_android/src/?lang=fr";
-		$xml=simplexml_load_file($url);
-		foreach ($xml as $vdm) {
-			$date = new DateTime(str_replace("-", "", $vdm->date));
-			$date = $date->format('Y-m-d H:i:s');
-
-			DB::table('posts')->insert(
-			    array('author' => $vdm->author, 'content' => $vdm->text, 'date' => $date)
-			);
-
-		}
+		echo "update";
 		$posts = post::get();
 		$this->layout->nest('content','posts.index',compact('posts'));
 	}
