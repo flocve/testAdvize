@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Test for iAdvize</title>
 
     <!-- Bootstrap core CSS -->
     {{HTML::style('http://getbootstrap.com/dist/css/bootstrap.min.css')}}

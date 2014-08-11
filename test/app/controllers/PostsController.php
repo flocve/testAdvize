@@ -1,5 +1,6 @@
 <?php
 
+// pour /posts
 class PostsController extends BaseController {
 	public function index(){
 
@@ -10,6 +11,7 @@ class PostsController extends BaseController {
 		$author = Input::get('author');
 
 
+		// En fonction des parametres situés sur l'URL
 		if($author){
 			$posts=DB::table('posts')
 				->where('author',$author)
@@ -41,11 +43,13 @@ class PostsController extends BaseController {
 		$this->layout->nest('content','posts.index',compact('posts'));
 	}
 
+	// Pour /posts/<id>
 	public function view($id){
 		$posts=post::where('id',$id)->firstOrFail();
 		$this->layout->nest('content','posts.view',compact('posts'));
 	}
 
+	// Pour /updateVdms
 	public function updateVdms(){
 		//on vide la table Posts
 -		DB::table('posts')->delete();
@@ -56,11 +60,12 @@ class PostsController extends BaseController {
 		foreach ($xml as $vdm) {
 			$date = new DateTime(str_replace("-", "", $vdm->date));
 			$date = $date->format('Y-m-d H:i:s');
-
-			DB::table('posts')->insert(
-			    array('author' => $vdm->author, 'content' => $vdm->text, 'date' => $date)
-			);
-
+			if($vdm){
+				// Incertion de la VDM dans la base
+				DB::table('posts')->insert(
+				    array('author' => $vdm->author, 'content' => $vdm->text, 'date' => $date)
+				);
+			}
 		}
 		$posts = post::get();
 		$this->layout->nest('content','posts.index',compact('posts'));
